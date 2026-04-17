@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DK+Loopet:wght@100..400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playwrite DK Loopet";
+  --font-family: "Inter", sans-serif;
+
+}
+
+.footer a {
+    padding: 0px 30px 0px 20px;
+}
+
+.footer a:hover{
+    color: rgb(248, 248, 205);
+    text-decoration: underline;
+    /* border-bottom: 2px solid rgb(241, 235, 235); */
+}
