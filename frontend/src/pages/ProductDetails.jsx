@@ -23,7 +23,7 @@ const ProductDetails = () => {
   const getProduct = async () => {
       try {
           const { data } = await axios.get(
-              `/api/v1/product/get-product/${params.slug}`
+              `${import.meta.env.VITE_API_URL}/api/v1/product/get-product/${params.slug}`
             );
             setProduct(data?.product);
             getRelatedProduct(data?.product?._id, data?.product?.category?._id)

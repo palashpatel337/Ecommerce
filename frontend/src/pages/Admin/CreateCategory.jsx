@@ -17,7 +17,7 @@ const CreateCategory = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/category/create-category", {
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/category/create-category`, {
         name,
       });
       if (data?.success) {
@@ -34,7 +34,7 @@ const CreateCategory = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-        const {data} = await axios.put(`/api/v1/category/update-category/${selected._id}`,{name:updateName});
+        const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/api/v1/category/update-category/${selected._id}`,{name:updateName});
         if (data.success) {
             toast.success(data.message)
             setUpdateName("");
@@ -55,7 +55,7 @@ const CreateCategory = () => {
   //Delete form
   const handleDelete = async (id) => {
     try {
-        const {data} = await axios.delete(`/api/v1/category/delete-category/${id}`);
+        const {data} = await axios.delete(`${import.meta.env.VITE_API_URL}/api/v1/category/delete-category/${id}`);
         if (data.success) {
             toast.success(data.message)
             getAllCategory();
@@ -73,7 +73,7 @@ const CreateCategory = () => {
   //Get All Category
   const getAllCategory = async () => {
     try { 
-      const { data } = await axios.get("/api/v1/category/get-category");
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/category/get-category`);
       if (data?.success) {
         setCategories(data?.category);
       }

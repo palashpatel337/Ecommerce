@@ -17,7 +17,7 @@ const CategoryProduct = () => {
   const getProduct = async () => {
     try {
       const { data } = await axios.get(
-        `/api/v1/product/category-product/${params.slug}`
+        `${import.meta.env.VITE_API_URL}/api/v1/product/category-product/${params.slug}`
       );
       setProducts(data?.products);
       setCategory(data?.category);

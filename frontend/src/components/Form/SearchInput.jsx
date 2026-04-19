@@ -14,7 +14,7 @@ const SearchInput = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const {data} = await axios.get(`/api/v1/product/search/${values.keyword}`)
+            const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/product/search/${values.keyword}`)
             setValues({...values, results: data})
             navigate('/search')
         } catch (error) {
