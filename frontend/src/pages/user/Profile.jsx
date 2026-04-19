@@ -14,6 +14,9 @@ export default function Profile() {
             <div className='p-5 col-span-3'>
                 <h1>Profile</h1>
                 <p>Welcome, {auth.user?.name}!</p>
+                <p>Email: {auth.user?.email}</p>
+                <p>Phone: {auth.user?.phone}</p>
+                <p>Address: {auth.user?.address}</p>
             </div>
         </div>
     </Layout>
