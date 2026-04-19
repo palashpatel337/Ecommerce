@@ -33,7 +33,7 @@ export const createProductController = async (req, res) => {
     if (photo.size > 1000000)
       return res.status(400).send({ error: "Photo size should be < 1MB" });
 
-    const product = new productModel({
+    const product = await productModel.create({
       name,
       description,
       price,
@@ -43,8 +43,6 @@ export const createProductController = async (req, res) => {
       slug: slugify(name),
       photo: photo, // or photo.filename depending on your storage
     });
-
-    await product.save();
 
     res.status(201).send({
       success: true,
