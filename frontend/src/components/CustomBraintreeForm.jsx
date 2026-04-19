@@ -11,7 +11,7 @@ export default function CustomBraintreeForm({ cart, onSuccess }) {
   useEffect(() => {
     const fetchToken = async () => {
       try {
-        const { data } = await axios.get("/api/v1/product/braintree/token");
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/product/braintree/token`);
         setClientToken(data?.clientToken);
       } catch (err) {
         console.error("Error getting client token:", err);
