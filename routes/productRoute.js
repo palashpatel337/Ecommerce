@@ -8,9 +8,9 @@ const router = express.Router();
 
 //ROUTES
 //ADD NEW PRODUCT
-router.post('/create-product',requireSignIn, isAdmin, upload.single("photo"), formidable(), createProductController)
+router.post('/create-product',requireSignIn, isAdmin, upload.single("photo"), createProductController)
 
-router.put('/update-product/:pid',requireSignIn, isAdmin, formidable(), updateProductController)
+router.put('/update-product/:pid',requireSignIn, isAdmin, updateProductController)
 
 //GET ALL PRODUCT
 router.get('/get-product', getProductController)
