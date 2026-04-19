@@ -40,7 +40,8 @@ const CreateProduct = () => {
 
   //Cloudinary Upload
     const handleUpload = async (file) => {
-    const formData = new FormData();
+      try {
+            const formData = new FormData();
     formData.append("file", file);
 
     const res = await axios.post(
@@ -49,6 +50,12 @@ const CreateProduct = () => {
     );
 
     return res.data.url;
+
+      } catch (error) {
+        console.log("Upload error:", error.response?.data || error.message);
+        toast.error("Image upload failed");
+        return null;
+      }
   };
 
 
@@ -103,9 +110,11 @@ const CreateProduct = () => {
         navigate("/dashboard/admin/products");
       } else {
         toast.error(data?.message);
+        console.log(error.response.data);
+
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
       toast.error("Something went wrong");
     }
   };
