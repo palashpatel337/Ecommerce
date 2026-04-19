@@ -20,9 +20,9 @@ const gateway = new braintree.BraintreeGateway({
 
 export const createProductController = async (req, res) => {
   try {
-    const { name, description, price, quantity, shipping, slug, category } =
-      req.fields;
-    const { photo } = req.files;
+    const { name, description, price, quantity, shipping, slug, category ,photo } =
+      req.body;
+    // const { photo } = req.files;
 
     switch (true) {
       case !name:
@@ -42,10 +42,11 @@ export const createProductController = async (req, res) => {
       // default:break;    
     }
     const products = new productModel({ ...req.fields, slug: slugify(name) });
-    if (photo) {
-      products.photo.data = fs.readFileSync(photo.path);
-      products.photo.contentType = photo.type;
-    }
+    // if (photo) {
+    //   products.photo.data = fs.readFileSync(photo.path);
+    //   products.photo.contentType = photo.type;
+    // }
+    
     await products.save();
     res.status(201).send({
       success: true,

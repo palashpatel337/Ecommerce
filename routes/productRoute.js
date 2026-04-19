@@ -2,12 +2,13 @@ import express, { Router }  from 'express';
 import { isAdmin, requireSignIn } from '../middlewares/authMiddleware.js';
 import { braintreePaymentController, braintreeTokenController, categoryProductController, createProductController, deleteProductController, getProductController, getSingleProductController, productCountController, productFiltersController, productListController, productPhotoConroller, relatedProductController, searchProductController, updateProductController } from '../controllers/productConroller.js';
 import formidable from 'express-formidable';
+import upload from 'cloud\multer';
 
 const router = express.Router();
 
 //ROUTES
 //ADD NEW PRODUCT
-router.post('/create-product',requireSignIn, isAdmin, formidable(), createProductController)
+router.post('/create-product',requireSignIn, isAdmin, upload.single("photo"), formidable(), createProductController)
 
 router.put('/update-product/:pid',requireSignIn, isAdmin, formidable(), updateProductController)
 
