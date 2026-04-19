@@ -20,45 +20,43 @@ const gateway = new braintree.BraintreeGateway({
 
 export const createProductController = async (req, res) => {
   try {
-    const { name, description, price, quantity, shipping, slug, category ,photo } =
-      req.body;
-    // const { photo } = req.files;
+    const { name, description, price, quantity, shipping, category } = req.body;
+    const photo = req.file; // multer gives file here
 
-    switch (true) {
-      case !name:
-        return res.status(500).send({ error: "Name is required" });
-      case !description:
-        return res.status(500).send({ error: "Description is required" });
-      case !price:
-        return res.status(500).send({ error: "Price is required" });
-      case !quantity:
-        return res.status(500).send({ error: "Quantity is required" });
-      case photo && photo.size > 1000000:
-        return res
-          .status(500)
-          .send({
-            error: "Photo is required and size should be less than 1mb",
-          });
-      // default:break;    
-    }
-    const products = new productModel({ ...req.fields, slug: slugify(name) });
-    // if (photo) {
-    //   products.photo.data = fs.readFileSync(photo.path);
-    //   products.photo.contentType = photo.type;
-    // }
-    
-    await products.save();
+    if (!name) return res.status(400).send({ error: "Name is required" });
+    if (!description) return res.status(400).send({ error: "Description is required" });
+    if (!price) return res.status(400).send({ error: "Price is required" });
+    if (!quantity) return res.status(400).send({ error: "Quantity is required" });
+    if (!category) return res.status(400).send({ error: "Category is required" });
+
+    if (!photo) return res.status(400).send({ error: "Photo is required" });
+    if (photo.size > 1000000)
+      return res.status(400).send({ error: "Photo size should be < 1MB" });
+
+    const product = new productModel({
+      name,
+      description,
+      price,
+      quantity,
+      shipping,
+      category,
+      slug: slugify(name),
+      photo: photo.path, // or photo.filename depending on your storage
+    });
+
+    await product.save();
+
     res.status(201).send({
       success: true,
       message: "New product added",
-      products,
+      product,
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      error,
       message: "Something went wrong",
+      error,
     });
   }
 };
