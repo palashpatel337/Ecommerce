@@ -33,9 +33,9 @@ const ProductDetails = () => {
   const getRelatedProduct = async (cid, pid) => {
     try {
       const { data } = await axios.get(
-        `/api/v1/product/related-product/${pid}/${cid}`,
+        `/api/v1/product/related-product/${cid}/${pid}`,
       );
-      setRelated(data?.products);
+      setRelated(data?.products || []);
     } catch (error) {
       console.log(error);
     }
