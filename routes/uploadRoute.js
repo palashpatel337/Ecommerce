@@ -21,17 +21,11 @@ router.post("/upload", upload.single("file"), async (req, res) => {
     console.log("File MIME type:", mime);
 
     let resourceType = "auto";
-    let folder = "job_portal_uploads";
-
-    if (mime === "application/pdf") {
-      folder = "job_portal_uploads/resumes";
-      resourceType = "raw";
-      console.log("Detected PDF file, uploading to resumes folder");
-    } else {
-      folder = "job_portal_uploads/images";
+    
+    let  folder = "e_commerce_uploads/images";
       resourceType = "image";
       console.log("Detected image file, uploading to images folder");
-    }
+    
 
     const result = await new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
