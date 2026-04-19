@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import { set } from "mongoose";
 const { Option } = Select;
 
 const CreateProduct = () => {
@@ -16,7 +17,7 @@ const CreateProduct = () => {
   const [shipping, setShipping] = useState("");
   const [quantity, setQuantity] = useState("");
   const [category, setCategory] = useState("");
-  const [photo, setPhoto] = useState("");
+  const [photo, setPhoto] = useState([]);
 
   const navigate = useNavigate();
 
@@ -37,30 +38,67 @@ const CreateProduct = () => {
     getAllCategory();
   }, []);
 
+  //Cloudinary Upload
+    const handleUpload = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const res = await axios.post(
+      `${import.meta.env.VITE_API_URL}/api/upload`,
+      formData,
+    );
+
+    return res.data.url;
+  };
+
+
   //Create Product
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
-      const productData = new FormData();
-      productData.append("name", name);
-      productData.append("description", description);
-      productData.append("price", price);
-      productData.append("quantity", quantity);
-      productData.append("photo", photo);
-      productData.append("category", category);
-      productData.append("shipping", shipping);
+      // const productData = new FormData();
+      // productData.append("name", name);
+      // productData.append("description", description);
+      // productData.append("price", price);
+      // productData.append("quantity", quantity);
+      // productData.append("photo", photo);
+      // productData.append("category", category);
+      // productData.append("shipping", shipping);
+
+      let photoUrl = "";
+
+      if (photo) {
+        photoUrl = await handleUpload(photo);
+      }
+
+
 
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/v1/product/create-product`,
-        productData,
+        {
+        name,
+        description,
+        price,
+        quantity,
+        shipping,
+        category,
+        photo: photoUrl
+        },
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${auth?.token}`,
           },
         }
       );
 
       if (data?.success) {
+        setName("");
+        setDescription("");
+        setPrice(""); 
+        setQuantity("");
+        setShipping("");
+        setCategory("");
+        setPhoto(null);
         toast.success("Product created successfully");
         navigate("/dashboard/admin/products");
       } else {
