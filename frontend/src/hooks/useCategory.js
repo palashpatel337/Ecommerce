@@ -1,5 +1,4 @@
 import axios from "axios";
-import { get } from "mongoose";
 import { useEffect, useState } from "react";
 
 export default function useCategory() {
