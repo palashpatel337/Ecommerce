@@ -30,6 +30,8 @@ function Login() {
                     user : res.data.user,
                     token : res.data.token,
                 })
+                console.log(res.data.user.role);
+                
                 localStorage.setItem("auth",JSON.stringify(res.data))
                 navigate(location.state || "/");
             } else {
