@@ -16,7 +16,7 @@ const CreateProduct = () => {
   const [shipping, setShipping] = useState("");
   const [quantity, setQuantity] = useState("");
   const [category, setCategory] = useState("");
-  const [photo, setPhoto] = useState([]);
+  const [photo, setPhoto] = useState(null);
 
   const navigate = useNavigate();
 
@@ -155,7 +155,7 @@ const CreateProduct = () => {
               </label>
             </div>
             <div className="mt-7">
-              {photo && (
+              {photo instanceof File && (
                 <img
                   src={URL.createObjectURL(photo)}
                   alt="product_photo"
