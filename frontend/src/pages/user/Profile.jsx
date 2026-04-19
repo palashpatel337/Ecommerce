@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../../components/Layout/Layout';
 import UserMenu from '../../components/Layout/UserMenu';
+import { useAuth } from '../../context/Auth';
 
 export default function Profile() {
     const [auth, setAuth] = useAuth();
