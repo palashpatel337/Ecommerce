@@ -5,7 +5,9 @@ import connectDB from './config/db.js';
 import authRoute from './routes/authRoute.js'
 import categoryRoute from './routes/categoryRoute.js'
 import productRoute from './routes/productRoute.js'
+import uploadRoute from './routes/uploadRoute.js'
 import cors from 'cors'
+import { upload } from './middlewares/uploadMiddleware.js';
 
 
 dotenv.config();
@@ -22,6 +24,7 @@ app.use(morgan('dev'));
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/category', categoryRoute);
 app.use('/api/v1/product', productRoute);
+app.use('/api', uploadRoute);
 
 
 app.get("/",(req,res) => {
