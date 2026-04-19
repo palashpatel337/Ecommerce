@@ -17,6 +17,7 @@ import CreateCategory from './pages/Admin/CreateCategory'
 import CreateProduct from './pages/Admin/CreateProduct'
 import Users from './pages/Admin/Users'
 import Profile from './pages/user/Profile'
+import EditProfile from './pages/user/EditProfile'
 import Orders from './pages/user/Orders'
 import Cart from './pages/user/Cart'
 import Products from './pages/Admin/Products'
@@ -51,6 +52,7 @@ function App() {
         <Route path='/dashboard' element={<PrivateRoute/>}>
           <Route path='user' element={<Dashboard/>} />
           <Route path='user/profile' element={<Profile/>} />
+          <Route path='user/update-profile' element={<EditProfile/>} />
           <Route path='user/orders' element={<Orders/>} />
           <Route path='user/cart' element={<Cart/>} />
         </Route>
