@@ -110,7 +110,7 @@ const HomePage = () => {
 
   return (
     <Layout title={"Best offers"}>
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col lg:flex-row max-w-6xl">
         {/* ================= FILTER SIDEBAR ================= */}
         <div className="hidden sm:block
           w-full lg:w-72
