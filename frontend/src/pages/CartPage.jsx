@@ -88,7 +88,7 @@ const CartPage = () => {
               key={p._id}
             >
               <div className="w-50 ">
-                <img alt={p.name} src={`/api/v1/product/get-photo/${p._id}`} />
+                <img alt={p.name} src={p.photo} />
               </div>
               <div className="px-5">
                 <h1>{p.name}</h1>

@@ -54,7 +54,7 @@ const CategoryProduct = () => {
                   cover={
                     <img
                       alt={p.name}
-                      src={`/api/v1/product/get-photo/${p._id}`}
+                      src={p.photo}
                     />
                   }
                   actions={[
