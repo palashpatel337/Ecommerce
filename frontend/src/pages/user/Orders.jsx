@@ -75,7 +75,7 @@ const Orders = () => {
                                         <div className="w-32 h-32 flex-shrink-0">
                                         <img
                                             alt={p.name}
-                                            src={`/api/v1/product/get-photo/${p._id}`}
+                                            src={p.photo}
                                             className="object-cover w-full h-full"
                                         />
                                         </div>

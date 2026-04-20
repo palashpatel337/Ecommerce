@@ -33,27 +33,6 @@ const CartPage = () => {
     }
   };
 
-  // const handlePayment = async() => {
-  //       try {
-  //     setLoading(true);
-  //     const { nonce } = await instance.requestPaymentMethod();
-  //     const { data } = await axios.post("/api/v1/product/braintree/payment", {
-  //       nonce,
-  //       cart,
-  //     });
-  //     setLoading(false);
-
-  //     // clear cart after success
-  //     localStorage.removeItem("cart");
-  //     setCart([]);
-  //     navigate("/dashboard/user/orders");
-  //     alert("Payment Successful ✅");
-  //   } catch (error) {
-  //     console.log(error);
-  //     setLoading(false);
-  //   }
-
-  // }
 
   const totalPrice = () => {
     let total = 0;
@@ -63,20 +42,6 @@ const CartPage = () => {
     return total;
   };
 
-  // const getToken = async () => {
-  //   try {
-  //     const {data} = await axios.get("/api/v1/product/braintree/token")
-  //         console.log("Braintree token from backend 👉", data);
-
-  //     setClientToken(data?.clientToken)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getToken()
-  // }, [auth?.token])
 
   return (
     <Layout>
@@ -88,7 +53,7 @@ const CartPage = () => {
               key={p._id}
             >
               <div className="w-50 ">
-                <img alt={p.name} src={p.photo} />
+                <img alt={p.name} src={p?.photo} />
               </div>
               <div className="px-5">
                 <h1>{p.name}</h1>
