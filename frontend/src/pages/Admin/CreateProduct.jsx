@@ -82,12 +82,12 @@ const CreateProduct = () => {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/v1/product/create-product`,
         {
-        name,
-        description,
-        price,
-        quantity,
-        shipping,
-        category,
+        // name,
+        // description,
+        // price,
+        // quantity,
+        // shipping,
+        // category,
         photo: photoUrl
         },
         {
@@ -98,12 +98,12 @@ const CreateProduct = () => {
       );
 
       if (data?.success) {
-        setName("");
-        setDescription("");
-        setPrice(""); 
-        setQuantity("");
-        setShipping("");
-        setCategory("");
+        // setName("");
+        // setDescription("");
+        // setPrice(""); 
+        // setQuantity("");
+        // setShipping("");
+        // setCategory("");
         setPhoto(null);
         toast.success("Product created successfully");
         navigate("/dashboard/admin/products");
