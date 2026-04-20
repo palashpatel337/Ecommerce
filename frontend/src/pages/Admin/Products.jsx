@@ -19,7 +19,7 @@ const Products = () => {
 
       if (data?.success){
         setProducts(data.products)
-        console.log(data?.products?.photo?.data);
+        console.log(data?.products);
         
       } 
     } catch (error) {
@@ -50,7 +50,7 @@ useEffect(() => {
                       className="object-contain"
                       hoverable
                       style={{padding: 20 }}
-                      cover={<img alt={p.name} src={p?.photo?.data} />} 
+                      cover={<img alt={p.name} src={p?.photo} />} 
                     >
                       <Meta title={p.name} description={p.description} />
                     </Card>
