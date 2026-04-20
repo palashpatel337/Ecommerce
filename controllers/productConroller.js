@@ -41,7 +41,7 @@ export const createProductController = async (req, res) => {
       shipping,
       category,
       slug: slugify(name),
-      photo: photo.filename, // or photo.filename depending on your storage
+      photo: photo, // or photo.filename depending on your storage
     });
 
     res.status(201).send({
