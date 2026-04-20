@@ -19,7 +19,7 @@ const Products = () => {
 
       if (data?.success){
         setProducts(data.products)
-        console.log(data?.products);
+        console.log(data?.products?.photo?.data);
         
       } 
     } catch (error) {
