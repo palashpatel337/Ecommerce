@@ -20,8 +20,8 @@ const gateway = new braintree.BraintreeGateway({
 
 export const createProductController = async (req, res) => {
   try {
-    const { name, description, price, quantity, shipping, category, photo } = req.body;
-    // const photo = req.file; // multer gives file here
+    const { name, description, price, quantity, shipping, category } = req.body;
+    const photo = req.file?.filename; // multer gives file here
 
     if (!name) return res.status(400).send({ error: "Name is required" });
     if (!description) return res.status(400).send({ error: "Description is required" });
