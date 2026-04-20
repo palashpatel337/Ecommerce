@@ -92,11 +92,11 @@ const CreateProduct = () => {
         category,
         photo: photoUrl
         },
-        {
-          headers: {
-            Authorization: `Bearer ${auth?.token}`,
-          },
-        }
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${auth?.token}`,
+        //   },
+        // }
       );
 
       if (data?.success) {
