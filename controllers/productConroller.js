@@ -239,7 +239,7 @@ export const productListController = async(req,res) => {
   try {
     const perPage = 16;
     const page = req.params.page ? req.params.page : 1
-    const products = await productModel.find({}).select("-photo").skip((page-1) * perPage).limit(perPage).sort({createdAt: -1});
+    const products = await productModel.find({}).skip((page-1) * perPage).limit(perPage).sort({createdAt: -1});
     res.status(201).send({
       success: true,
       message: "Product Fetched successfully",
@@ -265,7 +265,6 @@ export const searchProductController = async(req,res) => {
         {description : { $regex: keyword, $options: "i"}},
       ],
     })
-      .select("-photo")
     res.json(results)
   } catch (error) {
     console.log(error);
@@ -283,7 +282,7 @@ export const searchProductController = async(req,res) => {
 export const relatedProductController = async (req, res) =>{
   try {
     const {cid, pid} = req.params;
-    const products = await productModel.find({category: cid, _id: {$ne: pid}}).select("-photo").limit(3).populate("category")
+    const products = await productModel.find({category: cid, _id: {$ne: pid}}).limit(3).populate("category")
     res.status(201).send({
       success: true,
       message: "Related Products Fetched successfully",
