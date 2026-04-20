@@ -41,7 +41,7 @@ export const createProductController = async (req, res) => {
       shipping,
       category,
       slug: slugify(name),
-      photo: photo.filename, // or photo.filename depending on your storage
+      photo: photo, // or photo.filename depending on your storage
     });
 
     res.status(201).send({
@@ -63,14 +63,25 @@ export const getProductController = async (req, res) => {
   try {
     const products = await productModel
       .find({})
-      .select("-photo")
       .limit(12)
       .sort({ createdAt: -1 });
+
+    const formattedProducts = products.map((p) => {
+      return {
+        ...p._doc,
+        photo: p.photo?.data
+          ? `data:${p.photo.contentType};base64,${p.photo.data.toString(
+              "base64"
+            )}`
+          : null,
+      };
+    });
+
     res.status(200).send({
       success: true,
       message: "All products listed",
-      totalProducts: products.length,
-      products,
+      totalProducts: formattedProducts.length,
+      products: formattedProducts,
     });
   } catch (error) {
     console.log(error);
@@ -81,12 +92,10 @@ export const getProductController = async (req, res) => {
     });
   }
 };
-
 export const getSingleProductController = async (req, res) => {
   try {
     const product = await productModel
       .findOne({ slug: req.params.slug })
-      .select("-photo")
       .populate("category");
     res.status(200).send({
       success: true,
