@@ -23,11 +23,11 @@ export const createProductController = async (req, res) => {
     const { name, description, price, quantity, shipping, category, photo } = req.body;
     // const photo = req.file; // multer gives file here
 
-    // if (!name) return res.status(400).send({ error: "Name is required" });
-    // if (!description) return res.status(400).send({ error: "Description is required" });
-    // if (!price) return res.status(400).send({ error: "Price is required" });
-    // if (!quantity) return res.status(400).send({ error: "Quantity is required" });
-    // if (!category) return res.status(400).send({ error: "Category is required" });
+    if (!name) return res.status(400).send({ error: "Name is required" });
+    if (!description) return res.status(400).send({ error: "Description is required" });
+    if (!price) return res.status(400).send({ error: "Price is required" });
+    if (!quantity) return res.status(400).send({ error: "Quantity is required" });
+    if (!category) return res.status(400).send({ error: "Category is required" });
 
     if (!photo) return res.status(400).send({ error: "Photo is required" });
     if (photo.size > 1000000)
