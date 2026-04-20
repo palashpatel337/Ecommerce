@@ -48,7 +48,7 @@ useEffect(() => {
                       className="object-contain"
                       hoverable
                       style={{padding: 20 }}
-                      cover={<img alt={p.name} src={`/api/v1/product/get-photo/${p._id}`} />}
+                      cover={<img alt={p.name} src={p.photo} />} 
                     >
                       <Meta title={p.name} description={p.description} />
                     </Card>
