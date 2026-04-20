@@ -50,7 +50,7 @@ useEffect(() => {
                       className="object-contain"
                       hoverable
                       style={{padding: 20 }}
-                      cover={<img alt={p.name} src={p.photo} />} 
+                      cover={<img alt={p.name} src={p?.photo?.data} />} 
                     >
                       <Meta title={p.name} description={p.description} />
                     </Card>
