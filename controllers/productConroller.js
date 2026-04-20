@@ -20,8 +20,8 @@ const gateway = new braintree.BraintreeGateway({
 
 export const createProductController = async (req, res) => {
   try {
-    const { name, description, price, quantity, shipping, category } = req.body;
-    const photo = req.file?.filename; // multer gives file here
+    const { name, description, price, quantity, shipping, category, photo } = req.body;
+    // const photo = req.file?.filename; // multer gives file here
 
     if (!name) return res.status(400).send({ error: "Name is required" });
     if (!description) return res.status(400).send({ error: "Description is required" });
@@ -41,7 +41,7 @@ export const createProductController = async (req, res) => {
       shipping,
       category,
       slug: slugify(name),
-      photo: photo, // or photo.filename depending on your storage
+      photo: photo.filename, // or photo.filename depending on your storage
     });
 
     res.status(201).send({
