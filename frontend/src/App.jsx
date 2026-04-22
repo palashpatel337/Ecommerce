@@ -28,6 +28,7 @@ import Categories from './pages/Categories'
 import CategoryProduct from './pages/CategoryProduct'
 import CartPage from './pages/CartPage'
 import AdminOrders from './pages/Admin/AdminOrders'
+import Google from './pages/Google'
 
 
 
@@ -47,6 +48,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/privacy_policy" element={<PrivacyAndPolicy />} />
+        <Route path="/google" element={<Google />} />
 
 
         <Route path='/dashboard' element={<PrivateRoute/>}>
