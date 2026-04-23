@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import { useAuth } from "../../context/Auth";
+import AdminMenu from "../../components/Layout/AdminMenu";
 
 const Orders = () => {
   const [auth] = useAuth();
@@ -30,6 +31,9 @@ const Orders = () => {
 
   return (
     <Layout>
+        <div className="h-auto w-auto">
+            <AdminMenu/>
+        </div>
       <div className="p-10">
         <h1 className="text-3xl font-bold mb-5">My Orders</h1>
 
