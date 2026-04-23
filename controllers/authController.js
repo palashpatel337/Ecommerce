@@ -31,7 +31,7 @@ export const syncUserToMongo = async (req, res) => {
     }
 
     // store user in mongodb
-    const savedUser = await User.findOneAndUpdate(
+    const savedUser = await UserModel.findOneAndUpdate(
       { supabaseId: user.id },
       {
         supabaseId: user.id,
