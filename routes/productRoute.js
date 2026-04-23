@@ -1,6 +1,6 @@
 import express, { Router }  from 'express';
 import { isAdmin, requireSignIn } from '../middlewares/authMiddleware.js';
-import { braintreePaymentController, braintreeTokenController, categoryProductController, createProductController, deleteProductController, getProductController, getSingleProductController, productCountController, productFiltersController, productListController, productPhotoConroller, relatedProductController, searchProductController, updateProductController } from '../controllers/productConroller.js';
+import {  categoryProductController, createProductController, deleteProductController, getProductController, getSingleProductController, productCountController, productFiltersController, productListController, productPhotoConroller, relatedProductController, searchProductController, updateProductController } from '../controllers/productConroller.js';
 import formidable from 'express-formidable';
 import { upload } from "../middlewares/uploadMiddleware.js";
 
