@@ -109,6 +109,7 @@ export const verifyPayment = async (req, res) => {
       });
     }
 
+
     // Create Order in DB
     const order = await Order.create({
       products: products.map((p) => ({
@@ -134,10 +135,24 @@ export const verifyPayment = async (req, res) => {
       },
     });
 
+    //trial
+    const payment = await Payment.create({
+      products:products,
+      orderId: razorpay_order_id,
+      paymentId: razorpay_payment_id,
+      signature: razorpay_signature,
+      amount,
+      userEmail,
+      userName,
+      status: "success",
+    });
+
+
     return res.status(200).json({
       success: true,
       message: "Payment Verified & Order Saved",
       order,
+      payment,
     });
   } catch (error) {
     res.status(500).json({
