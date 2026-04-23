@@ -1,10 +1,13 @@
 import express from "express";
-import {registerController,loginController,testController, ForgotPasswordController, updateProfileController, getOrderStatusController, getOrdersController, getAllOrdersController} from "../controllers/authController.js";
+import {registerController,loginController,testController, ForgotPasswordController, updateProfileController, getOrderStatusController, getOrdersController, getAllOrdersController, syncUserToMongo} from "../controllers/authController.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 
 const router = express.Router()
 
 //ROUTER
+
+router.post("/sync-user", syncUserToMongo);
+
 //REGISTER || POST
 router.post('/register',registerController)
 

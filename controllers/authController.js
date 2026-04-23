@@ -4,6 +4,53 @@ import userModel from "../models/userModel.js";
 import orderModel from "../models/orderModel.js";
 import jwt from "jsonwebtoken";
 
+import supabaseAdmin from "../config/supabaseAdmin.js";
+import User from "../models/User.js";
+
+export const syncUserToMongo = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({ message: "No token provided" });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    // verify token and fetch user from Supabase
+    const { data, error } = await supabaseAdmin.auth.getUser(token);
+
+    if (error) {
+      return res.status(401).json({ message: error.message });
+    }
+
+    const user = data.user;
+
+    if (!user) {
+      return res.status(401).json({ message: "Invalid user" });
+    }
+
+    // store user in mongodb
+    const savedUser = await User.findOneAndUpdate(
+      { supabaseId: user.id },
+      {
+        supabaseId: user.id,
+        email: user.email,
+        fullName: user.user_metadata?.full_name || "",
+        avatarUrl: user.user_metadata?.avatar_url || "",
+        provider: "google",
+      },
+      { upsert: true, new: true }
+    );
+
+    return res.status(200).json({
+      message: "User synced successfully",
+      user: savedUser,
+    });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
 
 export const registerController = async (req,res) => {
     try {

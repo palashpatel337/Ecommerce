@@ -50,23 +50,34 @@ function Login() {
       }, []);
     
       // Google Login
-      const handleGoogleLogin = async () => {
-        try {
-          setLoading(true);
-          const { error } = await supabase.auth.signInWithOAuth({
-            provider: "google",
-          });
+      // const handleGoogleLogin = async () => {
+      //   try {
+      //     setLoading(true);
+      //     const { error } = await supabase.auth.signInWithOAuth({
+      //       provider: "google",
+      //     });
     
-          if (error) {
-            console.log("Login Error:", error.message);
-          }
-        } catch (err) {
-          console.log("Something went wrong:", err);
-        } finally {
-          setLoading(false);
-        }
-      };
-    
+      //     if (error) {
+      //       console.log("Login Error:", error.message);
+      //     }
+      //   } catch (err) {
+      //     console.log("Something went wrong:", err);
+      //   } finally {
+      //     setLoading(false);
+      //   }
+      // };
+
+      
+
+  const handleGoogleLogin = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: window.location.origin + "/auth-dashboard",
+      },
+    });
+  };
+
       // Logout
       const handleLogout = async () => {
         await supabase.auth.signOut();

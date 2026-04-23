@@ -29,6 +29,7 @@ import CategoryProduct from './pages/CategoryProduct'
 import CartPage from './pages/CartPage'
 import AdminOrders from './pages/Admin/AdminOrders'
 import Google from './pages/Google'
+import AuthDashboard from './pages/AuthDashboard'
 
 
 
@@ -48,6 +49,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/privacy_policy" element={<PrivacyAndPolicy />} />
+        <Route path="/auth-dashboard" element={<AuthDashboard />} />
+
         <Route path="/google" element={<Google />} />
 
 

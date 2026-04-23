@@ -1,6 +1,12 @@
 import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema({
+    supabaseId: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+
     name :{
         type : String,
         required : true,
