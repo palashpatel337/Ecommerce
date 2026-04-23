@@ -6,7 +6,7 @@ import authRoute from './routes/authRoute.js'
 import categoryRoute from './routes/categoryRoute.js'
 import productRoute from './routes/productRoute.js'
 import uploadRoute from './routes/uploadRoute.js'
-import paymentRoutes from './routes/paymentRoutes.js'
+import paymentRoute from './routes/paymentRoute.js'
 import cors from 'cors'
 import { upload } from './middlewares/uploadMiddleware.js';
 
@@ -26,7 +26,7 @@ app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/category', categoryRoute);
 app.use('/api/v1/product', productRoute);
 app.use('/api', uploadRoute);
-app.use("/api/payment", paymentRoutes);
+app.use("/api/payment", paymentRoute);
 
 
 
