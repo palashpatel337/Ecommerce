@@ -14,6 +14,95 @@ const CartPage = () => {
   const [clientToken, setClientToken] = useState('');
   const [instance, setInstance] = useState(null);
   const [loading, setLoading] = useState(false)
+    const [amount, setAmount] = useState(500);
+
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  const handlePayment = async () => {
+    const res = await loadRazorpayScript();
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Check your internet.");
+      return;
+    }
+
+    // Step 1: Create order from backend
+    const orderResponse = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/api/payment/create-order`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount }),
+      }
+    );
+
+    const orderData = await orderResponse.json();
+
+    if (!orderData.success) {
+      alert("Order creation failed");
+      return;
+    }
+
+    const options = {
+      key: orderData.key,
+      amount: orderData.order.amount,
+      currency: orderData.order.currency,
+      name: "My Ecommerce Store",
+      description: "Test Payment",
+      order_id: orderData.order.id,
+
+      handler: async function (response) {
+        // Step 2: Verify payment from backend
+        const verifyResponse = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/payment/verify-payment`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+              amount: amount,
+              userEmail: "test@gmail.com",
+              userName: "Palash Patel",
+            }),
+          }
+        );
+
+        const verifyData = await verifyResponse.json();
+
+        if (verifyData.success) {
+          alert("Payment Successful & Verified!");
+          console.log("Payment Saved:", verifyData.payment);
+        } else {
+          alert("Payment Verification Failed!");
+        }
+      },
+
+      prefill: {
+        name: "Palash Patel",
+        email: "test@gmail.com",
+        contact: "9999999999",
+      },
+
+      theme: {
+        color: "#3399cc",
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  };
+
+
 
   console.log(cart)
   const navigate = useNavigate();
@@ -163,6 +252,34 @@ const CartPage = () => {
           </div>
         </div>
       </div>
+          <div style={{ padding: "50px" }}>
+      <h2>Checkout Page</h2>
+
+      <h3>Pay ₹{amount}</h3>
+
+      <input
+        type="number"
+        value={amount}
+        onChange={(e) => setAmount(Number(e.target.value))}
+        style={{ padding: "10px", marginBottom: "10px" }}
+      />
+
+      <br />
+
+      <button
+        onClick={handlePayment}
+        style={{
+          padding: "12px 20px",
+          background: "green",
+          color: "white",
+          border: "none",
+          cursor: "pointer",
+        }}
+      >
+        Pay Now
+      </button>
+    </div>
+
     </Layout>
   );
 };
