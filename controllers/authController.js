@@ -5,7 +5,7 @@ import orderModel from "../models/orderModel.js";
 import jwt from "jsonwebtoken";
 
 import supabaseAdmin from "../config/supabaseAdmin.js";
-import User from "../models/User.js";
+// import User from "../models/User.js";
 
 export const syncUserToMongo = async (req, res) => {
   try {
@@ -31,7 +31,7 @@ export const syncUserToMongo = async (req, res) => {
     }
 
     // store user in mongodb
-    const savedUser = await UserModel.findOneAndUpdate(
+    const savedUser = await userModel.findOneAndUpdate(
       { supabaseId: user.id },
       {
         supabaseId: user.id,
