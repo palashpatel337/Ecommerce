@@ -12,6 +12,7 @@ const razorpay = new Razorpay({
 export const createOrder = async (req, res) => {
   try {
     const { amount } = req.body;
+    const product = req.body.product; // Assuming product details are sent in the request body
 
     if (!amount) {
       return res.status(400).json({ message: "Amount is required" });

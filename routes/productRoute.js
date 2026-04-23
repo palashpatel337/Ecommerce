@@ -33,8 +33,5 @@ router.get("/related-product/:cid/:pid", relatedProductController)
 
 router.get("/category-product/:slug", categoryProductController)
 
-router.get("/braintree/token", braintreeTokenController)
-
-router.post("/braintree/payment", requireSignIn, braintreePaymentController)
 
 export default router;

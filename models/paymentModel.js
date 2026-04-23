@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const paymentSchema = new mongoose.Schema(
   {
+    products: { ref: "Product", type: Array, required: true },
     orderId: { type: String, required: true },
     paymentId: { type: String, required: true },
     signature: { type: String, required: true },
