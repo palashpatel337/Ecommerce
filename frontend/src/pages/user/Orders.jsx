@@ -30,7 +30,7 @@ const Orders = () => {
   }, [auth?.user?.email]);
 
   return (
-    <Layout>
+    <Layout title={"Your Orders"}>
         <div className="h-auto w-auto">
             <AdminMenu/>
         </div>

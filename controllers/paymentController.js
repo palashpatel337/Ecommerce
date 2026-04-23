@@ -109,6 +109,12 @@ export const verifyPayment = async (req, res) => {
       });
     }
 
+if (!products || products.length === 0) {
+  return res.status(400).json({
+    success: false,
+    message: "Products are required",
+  });
+}
 
     // Create Order in DB
     const order = await Order.create({

@@ -7,7 +7,7 @@ import UserMenu from '../../components/Layout/UserMenu'
 const Dashboard = () => {
     const [auth] = useAuth();
   return (
-    <Layout title={'Ecommerce - Dashboard'}>
+    <Layout title={'Muin - Dashboard'}>
         <div className=' grid grid-cols-3 mr-5'>
             <div className='p-5 col-span-1 text-xl'>
                 <UserMenu></UserMenu>

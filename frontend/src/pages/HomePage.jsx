@@ -235,7 +235,7 @@ const HomePage = () => {
                   </button>,
                 ]}
               >
-                <Meta title={p.name} description={p.description} />
+                <Meta className="truncate " title={p.name} description={p.description} />
                 <p className="flex items-center mt-2 font-semibold">
                   <LiaRupeeSignSolid />
                   <span className="ml-1">{p.price}</span>

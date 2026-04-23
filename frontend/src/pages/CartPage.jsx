@@ -167,7 +167,7 @@ const CartPage = () => {
   };
 
   return (
-    <Layout>
+    <Layout title={"Cart Page"}>
       <div className="m-5 relative">
         <div className="grid grid-cols-6 gap-5">
           {/* CART ITEMS */}

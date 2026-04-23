@@ -30,7 +30,7 @@ const CategoryProduct = () => {
   }, [params?.slug]);
 
   return (
-    <Layout>
+    <Layout title={"Related Categories"}>
       <div className="m-10 text-3xl">
         <div className="text-center ">
           <h1>Category- {category?.name}</h1>

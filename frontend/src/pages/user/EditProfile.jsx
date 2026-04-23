@@ -38,7 +38,7 @@ function Profile() {
   };
 
   return (
-    <Layout>
+    <Layout title={"Update Profile"}>
       <div className=" ">
         <div className="w-[28vw] h-[60vh] absolute  px-5 py-3 top-[calc(50vh-35vh)]  left-[calc(50vw-14vw)] rounded-md shadow-xl/30 border-1 border-zinc-200">
           <h1 className="text-4xl text-center font-normal font-family mb-3 mx-15 border-b-1">
