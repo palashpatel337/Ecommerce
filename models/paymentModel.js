@@ -2,7 +2,14 @@ import mongoose from "mongoose";
 
 const paymentSchema = new mongoose.Schema(
   {
-    products: { ref: "Product", type: Array, required: true },
+    products: [
+      {
+        productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+        name: String,
+        price: Number,
+        quantity: { type: Number, default: 1 },
+      },
+    ],
     orderId: { type: String, required: true },
     paymentId: { type: String, required: true },
     signature: { type: String, required: true },

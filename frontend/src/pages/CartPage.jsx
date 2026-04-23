@@ -122,6 +122,8 @@ const CartPage = () => {
                 userEmail: auth?.user?.email,
                 userName: auth?.user?.name,
                 cartItems: cart,
+                userAddress: auth?.user?.address,
+                products: cart,
               }),
             }
           );
