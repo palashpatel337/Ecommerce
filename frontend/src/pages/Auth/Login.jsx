@@ -4,8 +4,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify';
 import {useLocation, useNavigate} from 'react-router-dom'
 import { useAuth } from '../../context/Auth';
-import { supabase } from "../../config/supabaseClient";
-
+import { supabase } from '../../../config/supabaseClient';
 
 
 function Login() {
